@@ -4,12 +4,14 @@ from tkinter import filedialog
 import os
 from mutagen.mp3 import MP3 # for finding total length of song
 import time
+from tkinter import ttk as ttk
 root = Tk()
 root.title("Music App")
-root.geometry("800x400")
+root.geometry("600x400")
 #initialising pygame mixer
 pygame.mixer.init()
 di = {}# to store directory of songs
+totallen = 0
 #FUnctions
 def addsong():
     song = filedialog.askopenfilename(title = "Choose a song", initialdir = r" C:\Users\Jay Shah\Desktop\python\mp3")
@@ -29,38 +31,76 @@ def addmultiple():
         di[songname] = directory
         playlist.insert(END, songname)
 def playedlen():
+    if stopped:
+        return
     plen = pygame.mixer.music.get_pos()//1000
+    #plen = int(slider.get())
+    global di
+    global paused
     convertedplen = time.strftime("%M:%S", time.gmtime(plen))
     cursong = playlist.curselection()
     song = playlist.get(ACTIVE)
-    mutagensong = MP3(song)
+    songname = di[song] + "/"+ song
+    global totallen
+    mutagensong = MP3(songname)
     totallen =  mutagensong.info.length
     convertedtotal = time.strftime("%M:%S", time.gmtime(totallen))
-    statusbar.config(text = f"Time Elapsed: {convertedplen}   of   {convertedtotal}  "  )
+
+    #plen += 1
+    if int(slider.get()) == totallen:
+        statusbar.config(text=f"Time Elapsed: {convertedtotal}   of   {convertedtotal}  ")
+    elif paused:
+        pass
+    elif plen == int(slider.get()):
+        sliderpos = int(totallen)
+        slider.config(to=sliderpos, value=int(slider.get()))
+        convertedplen = time.strftime("%M:%S", time.gmtime(int(slider.get())))
+        statusbar.config(text=f"Time Elapsed: {convertedplen}   of   {convertedtotal}  ")
+    else:
+        sliderpos = int(totallen)
+        slider.config(to=sliderpos, value= int(slider.get()))
+        convertedplen = time.strftime("%M:%S", time.gmtime(int(slider.get())))
+        statusbar.config(text=f"Time Elapsed: {convertedplen}   of   {convertedtotal}  ")
+        nextsec = int(slider.get()) + 1
+        slider.config(value = nextsec)
+    #slider.config(value = plen)
+    #sliderlabel.config(text = plen)
     statusbar.after(1000,playedlen)
+
 def play():
+    global stopped
+    stopped = False
     song = playlist.get(ACTIVE)
     global di
-    #songplay = os.path.abspath(song)
-    #print(songplay)
-    #print(type(songplay))
+    global totallen
     songname = di[song] + "/" + song
-    print(songname)
+    #print(songname)
     pygame.mixer.music.load(songname)
     pygame.mixer.music.play(loops = 0)#defines the number of times the song will play
+
     playedlen()
+    #Updating the slider length and value
+    slider.config(to=totallen, value=0)
+global stopped
+stopped = False
 def stop():
+    statusbar.config(text="Stopped Music")
+    slider.config(value = 0)
     pygame.mixer.music.stop()
     playlist.selection_clear(ACTIVE)
-    statusbar.config(text = "")
-
+    statusbar.config(text = "Stopped Music")
+    global stopped
+    stopped = True
 def forward():
+    global di
     try:
         nextone = playlist.curselection()[0] + 1
         print(nextone)
         songname = playlist.get(nextone)
+        songname = di[songname] + "/" + songname
         pygame.mixer.music.load(songname)
         pygame.mixer.music.play(loops=0)
+        slider.config(value=0)
         playlist.selection_clear(0, END)
         playlist.activate(nextone)
         playlist.selection_set(nextone, last =None)
@@ -68,37 +108,51 @@ def forward():
         pass
 
 def back():
+    global di
     try:
         prevone = playlist.curselection()[0] - 1
         #print(prevone)
         songname = playlist.get(prevone)
+        songname = di[songname] + "/" + songname
         pygame.mixer.music.load(songname)
         pygame.mixer.music.play(loops=0)
+        slider.config(value = 0)
         playlist.selection_clear(0, END)
         playlist.activate(prevone)
         playlist.selection_set(prevone, last =None)
     except:
         pass
 
-
+def slide(x):
+    #sliderlabel.config(text = f'{int(slider.get())} of {int(totallen)}')
+    song = playlist.get(ACTIVE)
+    global di
+    songname = di[song] + "/" + song
+    #print(songname)
+    pygame.mixer.music.load(songname)
+    pygame.mixer.music.play(loops=0, start = int(slider.get()))
 
 def delete():
+    stop()
     playlist.delete(ANCHOR)
     pygame.mixer.music.stop()
 def deleteall():
+    stop()
     playlist.delete(0, END)
     pygame.mixer.music.stop()
 global paused
 paused = False
 def pause(ispaused):
     global paused
-    paused = ispaused
+    global stopped
+    stopped = False
+    paused =  not ispaused
     if paused:
         pygame.mixer.music.pause()
-        paused = False
+        paused = True
     else:
         pygame.mixer.music.unpause()
-        paused = True
+        paused = False
 
 #Listbox showcasing songs present
 playlistl = Label(root, text = "Your Playlist")
@@ -106,10 +160,16 @@ playlistl.pack(pady=10)
 playlist = Listbox(root, bg = "black", fg = "white", width = 100)
 playlist.pack(pady=20)
 
+#Song Slider displaying position of song played
+slider = ttk.Scale(root,from_ = 0, to=100,orient = HORIZONTAL, value = 0,command = slide,length = 360)
+slider.pack()
+#sliderlabel = Label(root,text="0")
+#sliderlabel.pack()
+
+
 #Status Bar for song played and length
 statusbar = Label(root, text= "", bd = 1, relief = GROOVE)
 statusbar.pack(fill = X,pady = 5)
-
 
 #Images for buttons
 backbtnimg = PhotoImage(file = "previous.png")
