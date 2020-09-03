@@ -10,11 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/musicapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="173" column="19" lean-forward="true" selection-start-line="173" selection-start-column="19" selection-end-line="173" selection-end-column="19" />
+            <state relative-caret-position="174">
+              <caret line="50" column="90" selection-start-line="50" selection-start-column="90" selection-end-line="50" selection-end-column="90" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -26,15 +26,15 @@
         <entry file="file://$PROJECT_DIR$/../blackjack/bjconsole.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="922">
-              <caret line="207" lean-forward="true" selection-start-line="207" selection-end-line="207" />
+              <caret line="207" selection-start-line="207" selection-end-line="207" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../blackjack/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2220">
+            <state relative-caret-position="432">
               <caret line="222" selection-start-line="222" selection-end-line="222" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -60,12 +60,12 @@
       <list>
         <option value="$PROJECT_DIR$/../bookstore/main.py" />
         <option value="$PROJECT_DIR$/../blackjack/bjconsole.py" />
-        <option value="$PROJECT_DIR$/musicapp.py" />
         <option value="$PROJECT_DIR$/../blackjack/gui.py" />
+        <option value="$PROJECT_DIR$/musicapp.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1345" />
@@ -149,8 +149,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24255952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -242,27 +241,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/musicapp.py">
+    <entry file="file://$PROJECT_DIR$/../blackjack/bjconsole.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="173" column="19" lean-forward="true" selection-start-line="173" selection-start-column="19" selection-end-line="173" selection-end-column="19" />
+        <state relative-caret-position="922">
+          <caret line="207" selection-start-line="207" selection-end-line="207" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../blackjack/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="222" selection-start-line="222" selection-end-line="222" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../blackjack/bjconsole.py">
+    <entry file="file://$PROJECT_DIR$/musicapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="922">
-          <caret line="207" lean-forward="true" selection-start-line="207" selection-end-line="207" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../blackjack/gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2220">
-          <caret line="222" selection-start-line="222" selection-end-line="222" />
+        <state relative-caret-position="174">
+          <caret line="50" column="90" selection-start-line="50" selection-start-column="90" selection-end-line="50" selection-end-column="90" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

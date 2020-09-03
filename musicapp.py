@@ -47,8 +47,9 @@ def playedlen():
     convertedtotal = time.strftime("%M:%S", time.gmtime(totallen))
 
     #plen += 1
-    if int(slider.get()) == totallen:
+    if int(slider.get()) == int(totallen):
         statusbar.config(text=f"Time Elapsed: {convertedtotal}   of   {convertedtotal}  ")
+        forward()
     elif paused:
         pass
     elif plen == int(slider.get()):
@@ -171,7 +172,7 @@ slider.pack()
 statusbar = Label(root, text= "", bd = 1, relief = GROOVE)
 statusbar.pack(fill = X,pady = 5)
 
-#Images for buttons
+#Images for button
 backbtnimg = PhotoImage(file = "previous.png")
 playbtnimg = PhotoImage(file = "play.png")
 pausebtnimg = PhotoImage(file = "pause.png")
